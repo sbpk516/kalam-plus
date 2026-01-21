@@ -1,0 +1,5 @@
+node_modules
+dist
+build
+Design_figma
+*.min.js
