@@ -1,6 +1,6 @@
 import { Apple, Download } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { ctaText } from '@/data/site'
+import { buttonVariants } from '@/components/ui/button'
+import { ctaText, siteConfig } from '@/data/site'
 
 export function FinalCTA() {
   return (
@@ -23,11 +23,11 @@ export function FinalCTA() {
           </p>
 
           {/* CTA Button */}
-          <Button size="lg" className="group">
+          <a href={siteConfig.downloadUrl} className={buttonVariants({ size: 'lg', className: 'group' })}>
             <Apple className="h-6 w-6" />
             <span>{ctaText.final.button}</span>
             <Download className="h-5 w-5 transition-transform group-hover:translate-y-0.5" />
-          </Button>
+          </a>
 
           {/* Note */}
           <p className="mt-6 text-sm text-gray-500">{ctaText.final.note}</p>

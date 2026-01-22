@@ -1,5 +1,5 @@
 import { Apple, Download } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { navLinks } from '@/data/navigation'
 import { siteConfig } from '@/data/site'
 import logo from '@/assets/images/logo.jpg'
@@ -28,11 +28,11 @@ export function Header() {
         </div>
 
         {/* CTA Button */}
-        <Button size="sm" className="gap-2">
+        <a href={siteConfig.downloadUrl} className={buttonVariants({ size: 'sm' })}>
           <Apple className="h-4 w-4" />
           <span className="hidden sm:inline">Download</span>
           <Download className="h-4 w-4" />
-        </Button>
+        </a>
       </nav>
     </header>
   )

@@ -1,5 +1,5 @@
 import { Apple, Download, Shield, Zap, Cpu } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { siteConfig, ctaText } from '@/data/site'
 import logo from '@/assets/images/logo.jpg'
 import heroScreenshot from '@/assets/images/Capture_Page.png'
@@ -35,11 +35,11 @@ export function Hero() {
 
           {/* Primary CTA */}
           <div className="mb-12 flex flex-col items-center gap-4">
-            <Button size="lg" className="group">
+            <a href={siteConfig.downloadUrl} className={buttonVariants({ size: 'lg', className: 'group' })}>
               <Apple className="h-6 w-6" />
               <span>{ctaText.hero.button}</span>
               <Download className="h-5 w-5 transition-transform group-hover:translate-y-0.5" />
-            </Button>
+            </a>
 
             <div className="flex items-center gap-4 text-sm text-gray-500">
               <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">

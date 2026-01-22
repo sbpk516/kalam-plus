@@ -1,5 +1,5 @@
 import { Check, Apple, Download } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { siteConfig } from '@/data/site'
 import { pricingFeatures } from '@/data/pricing'
 
@@ -56,11 +56,11 @@ export function Pricing() {
             </ul>
 
             {/* CTA */}
-            <Button size="lg" className="w-full">
+            <a href={siteConfig.downloadUrl} className={buttonVariants({ size: 'lg', className: 'w-full' })}>
               <Apple className="h-5 w-5" />
               <span>Download for macOS</span>
               <Download className="h-5 w-5" />
-            </Button>
+            </a>
 
             {/* Note */}
             <p className="mt-4 text-center text-xs text-gray-500">

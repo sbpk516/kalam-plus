@@ -4,8 +4,9 @@ export const siteConfig: SiteConfig = {
   name: 'TranscriptAI',
   company: 'Kalam Plus',
   description: 'AI-powered transcription that never leaves your Mac. No cloud. No subscriptions.',
-  version: 'v0.1.5',
+  version: 'v0.1.7',
   platform: 'macOS 13+ • Apple Silicon optimized',
+  downloadUrl: 'https://github.com/sbpk516/transcriptai/releases/latest/download/TranscriptAI-0.1.7-arm64.dmg',
   price: {
     current: 0,
     original: 29,

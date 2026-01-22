@@ -66,6 +66,7 @@ export interface SiteConfig {
   description: string
   version: string
   platform: string
+  downloadUrl: string
   price: {
     current: number
     original: number
