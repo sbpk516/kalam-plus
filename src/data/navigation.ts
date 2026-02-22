@@ -2,7 +2,8 @@ import type { NavLink, FooterSection } from '@/types'
 
 export const navLinks: NavLink[] = [
   { label: 'Products', href: '#products' },
-  { label: 'Pricing', href: '#pricing' },
+  { label: 'Thadm', href: '#thadm' },
+  { label: 'TranscriptAI', href: '#transcriptai' },
   { label: 'About', href: '#about' },
 ]
 
@@ -10,9 +11,9 @@ export const footerSections: FooterSection[] = [
   {
     title: 'Products',
     links: [
-      { label: 'TranscriptAI', href: '#' },
+      { label: 'Thadm', href: '#thadm', badge: 'NEW' },
+      { label: 'TranscriptAI', href: '#transcriptai' },
       { label: 'Neural Notes', href: '#', badge: 'Coming Soon' },
-      { label: 'More Products', href: '#' },
     ],
   },
   {

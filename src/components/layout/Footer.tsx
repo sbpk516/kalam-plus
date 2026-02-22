@@ -2,6 +2,7 @@ import { Twitter, Github, Mail } from 'lucide-react'
 import { footerSections, socialLinks } from '@/data/navigation'
 import { siteConfig } from '@/data/site'
 import logo from '@/assets/images/logo.jpg'
+import type { AppRoute } from '@/hooks/useHashRoute'
 
 const iconMap: Record<string, React.ElementType> = {
   Twitter,
@@ -9,8 +10,27 @@ const iconMap: Record<string, React.ElementType> = {
   Mail,
 }
 
-export function Footer() {
+// Routes that the footer links can navigate to
+const routeLinks: Record<string, AppRoute> = {
+  '#thadm': 'thadm',
+  '#transcriptai': 'transcriptai',
+  '#products': 'products',
+}
+
+interface FooterProps {
+  navigate: (route: AppRoute) => void
+}
+
+export function Footer({ navigate }: FooterProps) {
   const currentYear = new Date().getFullYear()
+
+  const handleLinkClick = (href: string, e: React.MouseEvent) => {
+    const route = routeLinks[href]
+    if (route) {
+      e.preventDefault()
+      navigate(route)
+    }
+  }
 
   return (
     <footer className="border-t border-white/10 bg-background-primary">
@@ -18,10 +38,13 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand Column */}
           <div className="lg:col-span-1">
-            <a href="#" className="flex items-center gap-3">
-              <img src={logo} alt={siteConfig.name} className="h-8 w-8 rounded-lg" />
-              <span className="font-semibold text-white">{siteConfig.name}</span>
-            </a>
+            <button
+              onClick={() => navigate('products')}
+              className="flex items-center gap-3"
+            >
+              <img src={logo} alt={siteConfig.company} className="h-8 w-8 rounded-lg" />
+              <span className="font-semibold text-white">{siteConfig.company}</span>
+            </button>
             <p className="mt-4 text-sm text-gray-400">
               AI-powered productivity tools that respect your privacy.
             </p>
@@ -53,6 +76,7 @@ export function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
+                      onClick={(e) => handleLinkClick(link.href, e)}
                       className="text-sm text-gray-400 transition-colors hover:text-white"
                     >
                       {link.label}
