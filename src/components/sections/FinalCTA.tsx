@@ -1,9 +1,11 @@
 import { Apple, Download } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
-import { ctaText, siteConfig } from '@/data/site'
+import { ctaText } from '@/data/site'
 import { trackDownload } from '@/lib/analytics'
+import { useGithubRelease } from '@/hooks/useGithubRelease'
 
 export function FinalCTA() {
+  const { downloadUrl } = useGithubRelease()
   return (
     <section className="relative overflow-hidden py-32">
       {/* Background gradients */}
@@ -24,7 +26,7 @@ export function FinalCTA() {
           </p>
 
           {/* CTA Button */}
-          <a href={siteConfig.downloadUrl} onClick={() => trackDownload('final_cta')} className={buttonVariants({ size: 'lg', className: 'group' })}>
+          <a href={downloadUrl} onClick={() => trackDownload('final_cta')} className={buttonVariants({ size: 'lg', className: 'group' })}>
             <Apple className="h-6 w-6" />
             <span>{ctaText.final.button}</span>
             <Download className="h-5 w-5 transition-transform group-hover:translate-y-0.5" />

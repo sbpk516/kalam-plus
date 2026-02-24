@@ -2,8 +2,10 @@ import { Check, Apple, Download } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import { siteConfig } from '@/data/site'
 import { pricingFeatures } from '@/data/pricing'
+import { useGithubRelease } from '@/hooks/useGithubRelease'
 
 export function Pricing() {
+  const { downloadUrl } = useGithubRelease()
   return (
     <section id="pricing" className="section-padding">
       <div className="section-container">
@@ -56,7 +58,7 @@ export function Pricing() {
             </ul>
 
             {/* CTA */}
-            <a href={siteConfig.downloadUrl} className={buttonVariants({ size: 'lg', className: 'w-full' })}>
+            <a href={downloadUrl} className={buttonVariants({ size: 'lg', className: 'w-full' })}>
               <Apple className="h-5 w-5" />
               <span>Download for macOS</span>
               <Download className="h-5 w-5" />

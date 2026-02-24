@@ -2,10 +2,12 @@ import { Apple, Download, Shield, Zap, Cpu } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import { siteConfig, ctaText } from '@/data/site'
 import { trackDownload } from '@/lib/analytics'
+import { useGithubRelease } from '@/hooks/useGithubRelease'
 import logo from '@/assets/images/logo.jpg'
 import heroScreenshot from '@/assets/images/Capture_Page.png'
 
 export function Hero() {
+  const { version, downloadUrl } = useGithubRelease()
   return (
     <section className="relative overflow-hidden pb-20 pt-32 lg:pb-32 lg:pt-40">
       {/* Background gradient */}
@@ -36,7 +38,7 @@ export function Hero() {
 
           {/* Primary CTA */}
           <div className="mb-12 flex flex-col items-center gap-4">
-            <a href={siteConfig.downloadUrl} onClick={() => trackDownload('hero')} className={buttonVariants({ size: 'lg', className: 'group' })}>
+            <a href={downloadUrl} onClick={() => trackDownload('hero')} className={buttonVariants({ size: 'lg', className: 'group' })}>
               <Apple className="h-6 w-6" />
               <span>{ctaText.hero.button}</span>
               <Download className="h-5 w-5 transition-transform group-hover:translate-y-0.5" />
@@ -44,7 +46,7 @@ export function Hero() {
 
             <div className="flex items-center gap-4 text-sm text-gray-500">
               <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-                {siteConfig.version}
+                {version}
               </span>
               <span>{ctaText.hero.betaNote}</span>
             </div>
