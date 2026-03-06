@@ -17,7 +17,7 @@ export function ThadmPage() {
       <ThadmHero onDownloadClick={openModal} />
       <ThadmAppPreview />
       <ThadmFeatures />
-      <ThadmPricing onDownloadClick={openModal} />
+      <ThadmPricing />
       <ThadmFAQ />
       <ThadmFinalCTA onDownloadClick={openModal} />
       <ThadmDownloadModal open={open} onClose={closeModal} />

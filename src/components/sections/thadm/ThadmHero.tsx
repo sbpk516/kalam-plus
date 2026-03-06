@@ -1,4 +1,5 @@
 import { thadmConfig } from '@/data/thadm'
+import thadmIcon from '@/assets/images/thadm-icon.png'
 
 interface ThadmHeroProps {
   onDownloadClick: () => void
@@ -11,8 +12,8 @@ export function ThadmHero({ onDownloadClick }: ThadmHeroProps) {
       <div className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 bg-[radial-gradient(ellipse,rgba(99,102,241,0.08)_0%,rgba(139,92,246,0.04)_40%,transparent_70%)]" />
 
       {/* App Icon */}
-      <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-[20px] border border-indigo-500/25 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 text-4xl">
-        👁️
+      <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center overflow-hidden rounded-[20px] border border-indigo-500/25 bg-gradient-to-br from-indigo-500/20 to-purple-500/20">
+        <img src={thadmIcon} alt="Thadm" className="h-12 w-12 object-contain" style={{ filter: 'invert(1)' }} />
       </div>
 
       <h1 className="mx-auto max-w-3xl text-5xl font-bold leading-tight tracking-tight text-white lg:text-6xl">

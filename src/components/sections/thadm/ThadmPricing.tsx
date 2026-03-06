@@ -5,11 +5,7 @@ import { thadmConfig, thadmAnnualFeatures, thadmLifetimeFeatures } from '@/data/
 
 type Plan = 'annual' | 'lifetime'
 
-interface ThadmPricingProps {
-  onDownloadClick: () => void
-}
-
-export function ThadmPricing({ onDownloadClick }: ThadmPricingProps) {
+export function ThadmPricing() {
   const [selectedPlan, setSelectedPlan] = useState<Plan>('lifetime')
 
   return (
@@ -73,12 +69,14 @@ export function ThadmPricing({ onDownloadClick }: ThadmPricingProps) {
               </div>
             ))}
           </div>
-          <button
-            onClick={onDownloadClick}
-            className="mt-6 w-full rounded-xl border border-indigo-500/30 bg-indigo-500/[0.08] py-3 text-[15px] font-semibold text-indigo-300 transition-all hover:bg-indigo-500/[0.15]"
+          <a
+            href="https://kalam-plus.lemonsqueezy.com/checkout/buy/aa50a097-5fab-40c4-b1a4-0dc89f6bc4c0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 block w-full rounded-xl border border-indigo-500/30 bg-indigo-500/[0.08] py-3 text-center text-[15px] font-semibold text-indigo-300 transition-all hover:bg-indigo-500/[0.15]"
           >
             Choose Annual
-          </button>
+          </a>
         </div>
 
         {/* Lifetime Card */}
@@ -114,12 +112,14 @@ export function ThadmPricing({ onDownloadClick }: ThadmPricingProps) {
               </div>
             ))}
           </div>
-          <button
-            onClick={onDownloadClick}
-            className="mt-6 w-full rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 py-3 text-[15px] font-semibold text-white shadow-[0_4px_20px_rgba(99,102,241,0.3)] transition-all hover:shadow-[0_8px_30px_rgba(99,102,241,0.4)]"
+          <a
+            href="https://kalam-plus.lemonsqueezy.com/checkout/buy/a932ba42-c9b9-4913-bca0-825f785afb39"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 block w-full rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 py-3 text-center text-[15px] font-semibold text-white shadow-[0_4px_20px_rgba(99,102,241,0.3)] transition-all hover:shadow-[0_8px_30px_rgba(99,102,241,0.4)]"
           >
             Buy Lifetime — ${thadmConfig.pricing.lifetime.price}
-          </button>
+          </a>
         </div>
       </div>
 
