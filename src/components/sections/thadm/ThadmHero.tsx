@@ -1,6 +1,10 @@
 import { thadmConfig } from '@/data/thadm'
 
-export function ThadmHero() {
+interface ThadmHeroProps {
+  onDownloadClick: () => void
+}
+
+export function ThadmHero({ onDownloadClick }: ThadmHeroProps) {
   return (
     <section className="relative overflow-hidden px-6 pb-8 pt-24 text-center lg:px-8 lg:pt-32">
       {/* Ambient glow */}
@@ -26,13 +30,13 @@ export function ThadmHero() {
 
       {/* CTAs */}
       <div className="mt-8 flex items-center justify-center gap-4">
-        <a
-          href="#thadm-pricing"
+        <button
+          onClick={onDownloadClick}
           className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 px-8 py-3.5 text-base font-semibold text-white shadow-[0_8px_32px_rgba(99,102,241,0.3)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(99,102,241,0.4)]"
         >
           Start Free Trial
           <span className="text-sm">→</span>
-        </a>
+        </button>
         <button className="rounded-xl border border-indigo-500/20 bg-indigo-500/[0.08] px-8 py-3.5 text-base font-medium text-indigo-300 transition-all hover:border-indigo-500/30 hover:bg-indigo-500/[0.12]">
           Watch Demo
         </button>

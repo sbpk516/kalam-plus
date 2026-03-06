@@ -5,7 +5,11 @@ import { thadmConfig, thadmAnnualFeatures, thadmLifetimeFeatures } from '@/data/
 
 type Plan = 'annual' | 'lifetime'
 
-export function ThadmPricing() {
+interface ThadmPricingProps {
+  onDownloadClick: () => void
+}
+
+export function ThadmPricing({ onDownloadClick }: ThadmPricingProps) {
   const [selectedPlan, setSelectedPlan] = useState<Plan>('lifetime')
 
   return (
@@ -70,6 +74,7 @@ export function ThadmPricing() {
             ))}
           </div>
           <button
+            onClick={onDownloadClick}
             className="mt-6 w-full rounded-xl border border-indigo-500/30 bg-indigo-500/[0.08] py-3 text-[15px] font-semibold text-indigo-300 transition-all hover:bg-indigo-500/[0.15]"
           >
             Choose Annual
@@ -110,6 +115,7 @@ export function ThadmPricing() {
             ))}
           </div>
           <button
+            onClick={onDownloadClick}
             className="mt-6 w-full rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 py-3 text-[15px] font-semibold text-white shadow-[0_4px_20px_rgba(99,102,241,0.3)] transition-all hover:shadow-[0_8px_30px_rgba(99,102,241,0.4)]"
           >
             Buy Lifetime — ${thadmConfig.pricing.lifetime.price}
