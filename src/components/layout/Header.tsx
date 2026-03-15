@@ -69,7 +69,7 @@ export function Header({ currentRoute, navigate }: HeaderProps) {
           </button>
 
           {buyOpen && (
-            <div className="absolute right-0 top-full mt-2 w-56 overflow-hidden rounded-xl border border-white/10 bg-[#161B22] shadow-2xl">
+            <div className="absolute right-0 top-full z-[60] mt-2 w-56 overflow-hidden rounded-xl border border-white/10 bg-[#161B22] shadow-2xl">
               <a
                 href="https://kalam-plus.lemonsqueezy.com/checkout/buy/aa50a097-5fab-40c4-b1a4-0dc89f6bc4c0"
                 target="_blank"

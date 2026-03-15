@@ -27,8 +27,12 @@ function fetchLatestRelease(): Promise<ThadmRelease> {
       .then((data) => {
         const assets: { name: string; browser_download_url: string }[] =
           data.assets ?? []
-        const arm = assets.find((a) => a.name.includes('aarch64'))
-        const intel = assets.find((a) => a.name.includes('x64'))
+        const arm =
+          assets.find((a) => a.name.includes('aarch64') && a.name.endsWith('.dmg')) ??
+          assets.find((a) => a.name.includes('aarch64'))
+        const intel =
+          assets.find((a) => a.name.includes('x64') && a.name.endsWith('.dmg')) ??
+          assets.find((a) => a.name.includes('x64'))
         return {
           version: data.tag_name ?? '',
           macArmUrl: arm?.browser_download_url ?? RELEASES_URL,
