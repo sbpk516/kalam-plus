@@ -2,11 +2,13 @@ import { useState } from 'react'
 import { Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { thadmConfig, thadmAnnualFeatures, thadmLifetimeFeatures } from '@/data/thadm'
+import { ThadmBuyModal, useThadmBuyModal } from './ThadmBuyModal'
 
 type Plan = 'annual' | 'lifetime'
 
 export function ThadmPricing() {
   const [selectedPlan, setSelectedPlan] = useState<Plan>('lifetime')
+  const { open, openModal, closeModal } = useThadmBuyModal()
 
   return (
     <section id="thadm-pricing" className="section-container section-padding text-center">
@@ -69,14 +71,12 @@ export function ThadmPricing() {
               </div>
             ))}
           </div>
-          <a
-            href="https://kalam-plus.lemonsqueezy.com/checkout/buy/aa50a097-5fab-40c4-b1a4-0dc89f6bc4c0"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={openModal}
             className="mt-6 block w-full rounded-xl border border-indigo-500/30 bg-indigo-500/[0.08] py-3 text-center text-[15px] font-semibold text-indigo-300 transition-all hover:bg-indigo-500/[0.15]"
           >
             Choose Annual
-          </a>
+          </button>
         </div>
 
         {/* Lifetime Card */}
@@ -112,14 +112,12 @@ export function ThadmPricing() {
               </div>
             ))}
           </div>
-          <a
-            href="https://kalam-plus.lemonsqueezy.com/checkout/buy/a932ba42-c9b9-4913-bca0-825f785afb39"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={openModal}
             className="mt-6 block w-full rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 py-3 text-center text-[15px] font-semibold text-white shadow-[0_4px_20px_rgba(99,102,241,0.3)] transition-all hover:shadow-[0_8px_30px_rgba(99,102,241,0.4)]"
           >
             Buy Lifetime — ${thadmConfig.pricing.lifetime.price}
-          </a>
+          </button>
         </div>
       </div>
 
@@ -133,6 +131,8 @@ export function ThadmPricing() {
           )
         )}
       </div>
+
+      <ThadmBuyModal open={open} onClose={closeModal} />
     </section>
   )
 }
