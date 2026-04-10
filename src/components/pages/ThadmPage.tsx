@@ -1,5 +1,6 @@
 import { ThadmHero } from '@/components/sections/thadm/ThadmHero'
 import { ThadmAppPreview } from '@/components/sections/thadm/ThadmAppPreview'
+import { ThadmRecordingsGallery } from '@/components/sections/thadm/ThadmRecordingsGallery'
 import { ThadmFeatures } from '@/components/sections/thadm/ThadmFeatures'
 import { ThadmPricing } from '@/components/sections/thadm/ThadmPricing'
 import { ThadmFAQ } from '@/components/sections/thadm/ThadmFAQ'
@@ -16,6 +17,7 @@ export function ThadmPage() {
     <>
       <ThadmHero onDownloadClick={openModal} />
       <ThadmAppPreview />
+      <ThadmRecordingsGallery />
       <ThadmFeatures />
       <ThadmPricing />
       <ThadmFAQ />
