@@ -78,18 +78,32 @@ export function ThadmBuyModal({ open, onClose }: ThadmBuyModalProps) {
   }
 
   function handlePlanClick(checkoutUrl: string) {
-    // Download the DMG for the selected platform
+    // Open LemonSqueezy checkout in new tab first (before any async operations)
+    const checkoutWindow = window.open(checkoutUrl, '_blank')
+    
+    // Trigger download for the selected platform (in parallel)
     if (selectedPlatform && downloadUrls[selectedPlatform]) {
-      const link = document.createElement('a')
-      link.href = downloadUrls[selectedPlatform]
-      link.download = ''
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+      const downloadUrl = downloadUrls[selectedPlatform]
+      // Small delay to ensure checkout opens first
+      setTimeout(() => {
+        const link = document.createElement('a')
+        link.href = downloadUrl
+        // Don't set download attribute for cross-origin URLs
+        link.target = '_blank'
+        link.rel = 'noopener'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      }, 100)
     }
-    // Open LemonSqueezy checkout in new tab
-    window.open(checkoutUrl, '_blank', 'noopener,noreferrer')
+    
+    // Close modal
     handleClose()
+    
+    // Fallback: if popup was blocked, redirect current page
+    if (!checkoutWindow || checkoutWindow.closed || typeof checkoutWindow.closed === 'undefined') {
+      window.location.href = checkoutUrl
+    }
   }
 
   function handleClose() {
