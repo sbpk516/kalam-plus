@@ -1,6 +1,7 @@
 import { ArrowUpRight, Cpu, Infinity as InfinityIcon, Shield } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { AppRoute } from '@/hooks/useHashRoute'
+import transcriptAICapture from '@/assets/images/Capture_Page.png'
 
 interface ProductHubProps {
   navigate: (route: AppRoute) => void
@@ -189,122 +190,64 @@ function ProductScene({
 
 /* ---------------------------- Visuals ------------------------------------ */
 
-function WindowChrome({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="relative h-full w-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.04] via-white/[0.02] to-transparent shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] backdrop-blur-xl">
-      {/* Titlebar */}
-      <div className="flex items-center gap-1.5 border-b border-white/5 px-4 py-3">
-        <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-        <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-        <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-      </div>
-      {children}
-    </div>
-  )
-}
-
 function ThadmVisual() {
   return (
-    <div className="relative aspect-[5/4] w-full">
-      <div className="pointer-events-none absolute inset-0 -m-10 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.28)_0%,transparent_65%)] blur-2xl" />
-      <WindowChrome>
-        <div className="space-y-5 p-6">
-          {/* Header row */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-indigo-400" />
-              <div className="h-2.5 w-28 rounded bg-white/15" />
-            </div>
-            <div className="h-2.5 w-20 rounded bg-indigo-400/40" />
-          </div>
+    <div className="group relative aspect-[3/2] w-full [animation:float-gentle_8s_ease-in-out_infinite]">
+      {/* Ambient breathing glow */}
+      <div className="pointer-events-none absolute inset-0 -m-10 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.32)_0%,rgba(99,102,241,0.12)_40%,transparent_70%)] blur-2xl [animation:glow-pulse_6s_ease-in-out_infinite]" />
 
-          {/* Memory grid */}
-          <div className="grid grid-cols-4 gap-2.5">
-            {Array.from({ length: 12 }).map((_, i) => {
-              const highlight = i === 5 || i === 9
-              return (
-                <div
-                  key={i}
-                  className={cn(
-                    'aspect-square overflow-hidden rounded-lg border',
-                    highlight
-                      ? 'border-indigo-400/40 bg-gradient-to-br from-indigo-500/35 to-purple-500/20 shadow-[0_0_25px_-5px_rgba(139,92,246,0.6)]'
-                      : 'border-white/5 bg-gradient-to-br from-white/[0.05] to-white/[0.01]'
-                  )}
-                >
-                  <div
-                    className="h-full w-full"
-                    style={{
-                      background: `linear-gradient(135deg, rgba(139,92,246,${
-                        0.04 + (i % 3) * 0.05
-                      }) 0%, transparent 70%)`,
-                    }}
-                  />
-                </div>
-              )
-            })}
-          </div>
+      {/* Screenshot frame */}
+      <div className="relative h-full w-full overflow-hidden rounded-2xl border border-white/10 bg-white shadow-[0_40px_100px_-20px_rgba(99,102,241,0.35),0_20px_60px_-20px_rgba(0,0,0,0.8)] transition-all duration-500 ease-out group-hover:-translate-y-1 group-hover:shadow-[0_50px_120px_-20px_rgba(99,102,241,0.45),0_25px_70px_-20px_rgba(0,0,0,0.9)]">
+        <img
+          src="/thadm/Thadm_Home_Page.png"
+          alt="Thadm — your screen memory"
+          className="h-full w-full object-cover object-top"
+          loading="lazy"
+        />
 
-          {/* Bottom pill */}
-          <div className="flex items-center justify-between rounded-lg border border-white/5 bg-white/[0.03] px-3 py-2">
-            <div className="h-2 w-24 rounded bg-white/10" />
-            <div className="flex items-center gap-1">
-              <div className="h-1.5 w-1.5 rounded-full bg-indigo-400" />
-              <div className="h-2 w-10 rounded bg-white/10" />
-            </div>
-          </div>
-        </div>
-      </WindowChrome>
+        {/* Sheen sweep on first view */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent [animation:sheen_2.8s_ease-out_0.8s_both]"
+        />
+
+        {/* Inner rim highlight */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10"
+        />
+      </div>
     </div>
   )
 }
 
 function TranscriptAIVisual() {
   return (
-    <div className="relative aspect-[5/4] w-full">
-      <div className="pointer-events-none absolute inset-0 -m-10 bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.25)_0%,transparent_65%)] blur-2xl" />
-      <WindowChrome>
-        <div className="space-y-6 p-6">
-          {/* Waveform */}
-          <div className="flex h-20 items-center justify-center gap-[3px] px-2">
-            {Array.from({ length: 48 }).map((_, i) => {
-              const h = 18 + Math.abs(Math.sin(i * 0.55) * 45) + Math.abs(Math.cos(i * 0.23) * 18)
-              return (
-                <div
-                  key={i}
-                  className="w-[3px] rounded-full bg-gradient-to-b from-cyan-200 via-cyan-400 to-cyan-500/20"
-                  style={{ height: `${Math.min(h, 90)}%` }}
-                />
-              )
-            })}
-          </div>
+    <div className="group relative aspect-[3/2] w-full [animation:float-gentle_8s_ease-in-out_infinite_-4s]">
+      {/* Ambient breathing glow */}
+      <div className="pointer-events-none absolute inset-0 -m-10 bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.32)_0%,rgba(168,85,247,0.12)_40%,transparent_70%)] blur-2xl [animation:glow-pulse_6s_ease-in-out_infinite_-3s]" />
 
-          {/* Transcript lines */}
-          <div className="space-y-2.5">
-            <div className="flex items-center gap-2">
-              <div className="h-2 w-12 shrink-0 rounded bg-cyan-400/40" />
-              <div className="h-2 w-full rounded bg-white/10" />
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="h-2 w-12 shrink-0 rounded bg-white/10" />
-              <div className="h-2 w-5/6 rounded bg-white/10" />
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="h-2 w-12 shrink-0 rounded bg-white/10" />
-              <div className="h-2 w-4/6 rounded bg-white/10" />
-            </div>
-          </div>
+      {/* Screenshot frame */}
+      <div className="relative h-full w-full overflow-hidden rounded-2xl border border-white/10 bg-background-secondary shadow-[0_40px_100px_-20px_rgba(34,211,238,0.32),0_20px_60px_-20px_rgba(0,0,0,0.8)] transition-all duration-500 ease-out group-hover:-translate-y-1 group-hover:shadow-[0_50px_120px_-20px_rgba(34,211,238,0.42),0_25px_70px_-20px_rgba(0,0,0,0.9)]">
+        <img
+          src={transcriptAICapture}
+          alt="TranscriptAI — audio capture"
+          className="h-full w-full object-cover object-top"
+          loading="lazy"
+        />
 
-          {/* Status row */}
-          <div className="flex items-center justify-between border-t border-white/5 pt-3">
-            <div className="flex items-center gap-2">
-              <div className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
-              <div className="h-2 w-20 rounded bg-white/10" />
-            </div>
-            <div className="h-2 w-16 rounded bg-white/10" />
-          </div>
-        </div>
-      </WindowChrome>
+        {/* Sheen sweep on first view */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/35 to-transparent [animation:sheen_2.8s_ease-out_1.2s_both]"
+        />
+
+        {/* Inner rim highlight */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10"
+        />
+      </div>
     </div>
   )
 }
