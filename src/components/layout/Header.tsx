@@ -1,3 +1,4 @@
+import { Sparkles } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { navLinks } from '@/data/navigation'
 import { siteConfig } from '@/data/site'
@@ -15,34 +16,39 @@ export function Header({ currentRoute, navigate }: HeaderProps) {
 
   return (
     <>
-      <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-background-primary/80 backdrop-blur-xl">
+      <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/[0.06] bg-background-primary/60 backdrop-blur-xl">
         <nav className="section-container flex h-16 items-center justify-between">
-          {/* Logo - now Kalam Plus brand */}
-          <button
-            onClick={() => navigate('products')}
-            className="flex items-center gap-3"
-          >
-            <img src={logo} alt={siteConfig.company} className="h-8 w-8 rounded-lg" />
-            <span className="font-semibold text-white">{siteConfig.company}</span>
+          {/* Brand */}
+          <button onClick={() => navigate('products')} className="group flex items-center gap-2.5">
+            <img
+              src={logo}
+              alt={siteConfig.company}
+              className="h-7 w-7 rounded-lg ring-1 ring-white/10"
+            />
+            <span className="text-[15px] font-medium tracking-tight text-white transition-colors group-hover:text-gray-100">
+              {siteConfig.company}
+            </span>
           </button>
 
-          {/* Navigation Links */}
-          <div className="hidden items-center gap-8 md:flex">
+          {/* Navigation */}
+          <div className="hidden items-center gap-1 md:flex">
             {navLinks.map((link) => {
               const route = link.href.replace('#', '') as AppRoute
               const isActive =
-                currentRoute === route ||
-                (link.label === 'Products' && currentRoute === 'products')
+                currentRoute === route || (link.label === 'Products' && currentRoute === 'products')
               return (
                 <button
                   key={link.href}
                   onClick={() => navigate(route as AppRoute)}
                   className={cn(
-                    'text-sm transition-colors',
-                    isActive ? 'font-medium text-white' : 'text-gray-400 hover:text-white'
+                    'relative rounded-full px-3.5 py-1.5 text-[13px] transition-colors duration-200',
+                    isActive ? 'text-white' : 'text-gray-400 hover:text-white'
                   )}
                 >
-                  {link.label}
+                  {isActive && (
+                    <span className="absolute inset-0 rounded-full bg-white/[0.06]" aria-hidden />
+                  )}
+                  <span className="relative">{link.label}</span>
                 </button>
               )
             })}
@@ -51,9 +57,9 @@ export function Header({ currentRoute, navigate }: HeaderProps) {
           {/* Buy Thadm CTA */}
           <button
             onClick={openModal}
-            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-indigo-500/30"
+            className="group inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 px-4 py-1.5 text-[13px] font-medium text-white shadow-[0_8px_24px_-8px_rgba(99,102,241,0.5)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-8px_rgba(99,102,241,0.65)]"
           >
-            <span>🎯</span>
+            <Sparkles className="h-3.5 w-3.5" strokeWidth={2} />
             <span className="hidden sm:inline">Buy Thadm</span>
           </button>
         </nav>

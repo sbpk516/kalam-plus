@@ -88,9 +88,7 @@ export function ThadmDownloadModal({ open, onClose }: ThadmDownloadModalProps) {
               >
                 <div className="text-indigo-400">{p.icon}</div>
                 <div className="flex-1">
-                  <span className="block text-sm font-semibold text-white">
-                    {p.label}
-                  </span>
+                  <span className="block text-sm font-semibold text-white">{p.label}</span>
                   <span className="text-xs text-gray-400">{p.sublabel}</span>
                 </div>
                 <Download className="h-4 w-4 text-indigo-400" />
@@ -102,9 +100,7 @@ export function ThadmDownloadModal({ open, onClose }: ThadmDownloadModalProps) {
               >
                 <div className="text-gray-600">{p.icon}</div>
                 <div className="flex-1">
-                  <span className="block text-sm font-semibold text-gray-500">
-                    {p.label}
-                  </span>
+                  <span className="block text-sm font-semibold text-gray-500">{p.label}</span>
                   <span className="text-xs text-gray-600">{p.sublabel}</span>
                 </div>
               </div>

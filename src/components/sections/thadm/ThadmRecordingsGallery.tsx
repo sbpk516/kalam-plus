@@ -1,99 +1,89 @@
 import { Play, Clock, Mic, Monitor } from 'lucide-react'
 
+const features = [
+  {
+    icon: Mic,
+    label: 'System & mic audio',
+    body: 'Capture both sides of every call — your microphone and system audio simultaneously.',
+    tone: 'text-indigo-200',
+  },
+  {
+    icon: Play,
+    label: 'Sync playback',
+    body: 'Click any transcript word to jump to that exact moment in the recording.',
+    tone: 'text-purple-200',
+  },
+  {
+    icon: Clock,
+    label: 'Smart timestamps',
+    body: 'Every word is timestamped. Know exactly when something was said.',
+    tone: 'text-cyan-200',
+  },
+  {
+    icon: Monitor,
+    label: 'Screen context',
+    body: 'See what was on your screen at the moment each thing was said.',
+    tone: 'text-pink-200',
+  },
+] as const
+
 export function ThadmRecordingsGallery() {
   return (
-    <section className="section-container section-padding bg-gradient-to-b from-transparent via-indigo-500/[0.02] to-transparent">
-      <div className="mx-auto max-w-6xl">
-        {/* Section Header */}
-        <div className="mb-12 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-1.5 text-sm text-indigo-300">
-            <Mic className="h-4 w-4" />
-            Audio Intelligence
-          </div>
-          <h2 className="mb-3 text-3xl font-bold tracking-tight text-white lg:text-4xl">
-            Never miss a{' '}
-            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-purple-300 bg-clip-text text-transparent">
-              word
+    <section className="relative border-t border-white/[0.06] py-24 lg:py-36">
+      <div className="section-container">
+        {/* Header */}
+        <div className="mx-auto mb-16 max-w-2xl text-center">
+          <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.24em] text-gray-500">
+            Audio intelligence
+          </p>
+          <h2 className="text-4xl font-semibold tracking-tight text-white lg:text-[56px] lg:leading-[1.05]">
+            Never miss
+            <br />
+            <span className="bg-gradient-to-b from-white via-gray-200 to-gray-500 bg-clip-text text-transparent">
+              a single word.
             </span>
           </h2>
-          <p className="mx-auto max-w-2xl text-gray-400">
-            Record meetings, calls, and conversations. Get searchable transcripts with speaker detection.
+          <p className="mx-auto mt-5 max-w-2xl text-lg text-gray-400">
+            Record meetings, calls, and conversations — with searchable transcripts and speaker
+            detection.
           </p>
         </div>
 
         {/* Two Column Layout */}
-        <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           {/* Screenshot */}
           <div className="relative order-2 lg:order-1">
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0d1117] shadow-2xl">
-              {/* Window Header */}
-              <div className="flex items-center gap-2 border-b border-white/10 bg-white/[0.02] px-4 py-3">
+            <div className="pointer-events-none absolute -inset-10 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.18)_0%,transparent_65%)] blur-2xl" />
+
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-background-secondary shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)]">
+              <div className="flex items-center gap-2 border-b border-white/5 bg-white/[0.02] px-4 py-3">
                 <div className="flex gap-1.5">
-                  <div className="h-3 w-3 rounded-full bg-[#ff5f57]" />
-                  <div className="h-3 w-3 rounded-full bg-[#febc2e]" />
-                  <div className="h-3 w-3 rounded-full bg-[#28c840]" />
+                  <div className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                  <div className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                  <div className="h-2.5 w-2.5 rounded-full bg-white/15" />
                 </div>
-                <span className="flex-1 text-center text-xs text-gray-500">Recordings</span>
+                <span className="flex-1 text-center text-[11px] font-medium tracking-wide text-gray-500">
+                  Recordings
+                </span>
+                <div className="w-14" />
               </div>
-              <img
-                src="/thadm/Recordings_Page.png"
-                alt="Thadm Recordings"
-                className="w-full"
-              />
+              <img src="/thadm/Recordings_Page.png" alt="Thadm Recordings" className="w-full" />
             </div>
-            {/* Decorative glow */}
-            <div className="pointer-events-none absolute -bottom-10 -left-10 -right-10 -top-10 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.1)_0%,transparent_70%)]" />
           </div>
 
           {/* Features */}
-          <div className="order-1 space-y-6 lg:order-2">
-            <div className="flex gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-indigo-500/10">
-                <Mic className="h-5 w-5 text-indigo-400" />
+          <div className="order-1 space-y-10 lg:order-2">
+            {features.map(({ icon: Icon, label, body, tone }) => (
+              <div key={label} className="flex gap-5">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
+                  <Icon className={`h-5 w-5 ${tone}`} strokeWidth={1.6} />
+                </div>
+                <div>
+                  <h3 className="mb-1.5 text-lg font-medium text-white">{label}</h3>
+                  <p className="text-[15px] leading-relaxed text-gray-400">{body}</p>
+                </div>
               </div>
-              <div>
-                <h3 className="mb-1 font-semibold text-white">System & Mic Audio</h3>
-                <p className="text-sm text-gray-400">
-                  Capture both sides of video calls — your microphone and system audio simultaneously
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-purple-500/10">
-                <Play className="h-5 w-5 text-purple-400" />
-              </div>
-              <div>
-                <h3 className="mb-1 font-semibold text-white">Sync Playback</h3>
-                <p className="text-sm text-gray-400">
-                  Click any transcript word to jump to that exact moment in the recording
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-cyan-500/10">
-                <Clock className="h-5 w-5 text-cyan-400" />
-              </div>
-              <div>
-                <h3 className="mb-1 font-semibold text-white">Smart Timestamps</h3>
-                <p className="text-sm text-gray-400">
-                  Every word is timestamped. Know exactly when something was said
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-pink-500/10">
-                <Monitor className="h-5 w-5 text-pink-400" />
-              </div>
-              <div>
-                <h3 className="mb-1 font-semibold text-white">Screen Context</h3>
-                <p className="text-sm text-gray-400">
-                  See what was on your screen when each thing was said
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

@@ -1,12 +1,4 @@
-import {
-  Mic,
-  Upload,
-  Youtube,
-  Shield,
-  Zap,
-  Keyboard,
-  type LucideIcon,
-} from 'lucide-react'
+import { Mic, Upload, Youtube, Shield, Zap, Keyboard, type LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { features } from '@/data/features'
 
@@ -19,74 +11,73 @@ const iconMap: Record<string, LucideIcon> = {
   Keyboard,
 }
 
-const accentColors = {
-  cyan: {
-    gradient: 'from-cyan-400 to-cyan-600',
-    glow: 'from-cyan-500/10 to-transparent',
-  },
-  purple: {
-    gradient: 'from-purple-400 to-purple-600',
-    glow: 'from-purple-500/10 to-transparent',
-  },
-  red: {
-    gradient: 'from-red-400 to-red-600',
-    glow: 'from-red-500/10 to-transparent',
-  },
+const accentText: Record<string, string> = {
+  cyan: 'text-cyan-300',
+  purple: 'text-purple-300',
+  red: 'text-rose-300',
+}
+
+const accentGlow: Record<string, string> = {
+  cyan: 'from-cyan-500/[0.08] to-transparent',
+  purple: 'from-purple-500/[0.08] to-transparent',
+  red: 'from-rose-500/[0.08] to-transparent',
 }
 
 export function FeatureGrid() {
   return (
-    <section id="features" className="section-padding">
+    <section id="features" className="relative border-t border-white/[0.06] py-24 lg:py-32">
       <div className="section-container">
         {/* Heading */}
         <div className="mx-auto mb-16 max-w-2xl text-center">
-          <h2 className="mb-4 text-4xl font-bold tracking-tight lg:text-5xl">
-            Everything you need to <span className="gradient-text">transcribe</span>
+          <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.24em] text-gray-500">
+            Capabilities
+          </p>
+          <h2 className="text-4xl font-semibold tracking-tight text-white lg:text-[56px] lg:leading-[1.05]">
+            Everything you need
+            <br />
+            <span className="bg-gradient-to-b from-white via-gray-200 to-gray-500 bg-clip-text text-transparent">
+              to transcribe.
+            </span>
           </h2>
-          <p className="text-lg text-gray-400">
-            Powerful features designed for privacy-conscious professionals
+          <p className="mt-5 text-lg text-gray-400">
+            Powerful features, designed for privacy-conscious professionals.
           </p>
         </div>
 
         {/* Feature Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => {
             const Icon = iconMap[feature.icon]
-            const colors = accentColors[feature.accent]
-
             return (
               <div
                 key={feature.id}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 transition-all duration-300 hover:border-white/20 hover:bg-white/10"
+                className="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:bg-white/[0.04]"
               >
-                {/* Hover glow effect */}
                 <div
                   className={cn(
-                    'absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-300 group-hover:opacity-100',
-                    colors.glow
+                    'pointer-events-none absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100',
+                    accentGlow[feature.accent]
+                  )}
+                />
+                <div
+                  className={cn(
+                    'pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-60',
+                    feature.accent === 'cyan'
+                      ? 'bg-cyan-400/20'
+                      : feature.accent === 'purple'
+                        ? 'bg-purple-400/20'
+                        : 'bg-rose-400/20'
                   )}
                 />
 
-                {/* Icon */}
-                <div className="relative mb-4">
-                  <div className="inline-flex rounded-xl bg-gradient-to-br from-white/10 to-white/5 p-3">
-                    <Icon
-                      className={cn('h-6 w-6 bg-gradient-to-r bg-clip-text', colors.gradient)}
-                      style={{
-                        color:
-                          feature.accent === 'cyan'
-                            ? '#22d3ee'
-                            : feature.accent === 'purple'
-                              ? '#a855f7'
-                              : '#f87171',
-                      }}
-                    />
-                  </div>
+                <div className="relative mb-6 flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
+                  <Icon className={cn('h-5 w-5', accentText[feature.accent])} strokeWidth={1.6} />
                 </div>
 
-                {/* Content */}
-                <h3 className="relative mb-2 text-xl font-semibold text-white">{feature.title}</h3>
-                <p className="relative text-gray-400">{feature.description}</p>
+                <h3 className="relative mb-2 text-lg font-medium text-white">{feature.title}</h3>
+                <p className="relative text-[15px] leading-relaxed text-gray-400">
+                  {feature.description}
+                </p>
               </div>
             )
           })}

@@ -80,7 +80,7 @@ export function ThadmBuyModal({ open, onClose }: ThadmBuyModalProps) {
   function handlePlanClick(checkoutUrl: string) {
     // Open LemonSqueezy checkout in new tab first (before any async operations)
     const checkoutWindow = window.open(checkoutUrl, '_blank')
-    
+
     // Trigger download for the selected platform (in parallel)
     if (selectedPlatform && downloadUrls[selectedPlatform]) {
       const downloadUrl = downloadUrls[selectedPlatform]
@@ -96,10 +96,10 @@ export function ThadmBuyModal({ open, onClose }: ThadmBuyModalProps) {
         document.body.removeChild(link)
       }, 100)
     }
-    
+
     // Close modal
     handleClose()
-    
+
     // Fallback: if popup was blocked, redirect current page
     if (!checkoutWindow || checkoutWindow.closed || typeof checkoutWindow.closed === 'undefined') {
       window.location.href = checkoutUrl
@@ -135,9 +135,7 @@ export function ThadmBuyModal({ open, onClose }: ThadmBuyModalProps) {
         {!selectedPlatform ? (
           <>
             <h3 className="mb-1 text-xl font-bold text-white">Buy Thadm</h3>
-            <p className="mb-6 text-sm text-gray-400">
-              Choose your platform first.
-            </p>
+            <p className="mb-6 text-sm text-gray-400">Choose your platform first.</p>
 
             <div className="space-y-3">
               {platformsMeta.map((p) =>
@@ -149,9 +147,7 @@ export function ThadmBuyModal({ open, onClose }: ThadmBuyModalProps) {
                   >
                     <div className="text-indigo-400">{p.icon}</div>
                     <div className="flex-1">
-                      <span className="block text-sm font-semibold text-white">
-                        {p.label}
-                      </span>
+                      <span className="block text-sm font-semibold text-white">{p.label}</span>
                       <span className="text-xs text-gray-400">{p.sublabel}</span>
                     </div>
                   </button>
@@ -162,9 +158,7 @@ export function ThadmBuyModal({ open, onClose }: ThadmBuyModalProps) {
                   >
                     <div className="text-gray-600">{p.icon}</div>
                     <div className="flex-1">
-                      <span className="block text-sm font-semibold text-gray-500">
-                        {p.label}
-                      </span>
+                      <span className="block text-sm font-semibold text-gray-500">{p.label}</span>
                       <span className="text-xs text-gray-600">{p.sublabel}</span>
                     </div>
                   </div>
@@ -182,7 +176,8 @@ export function ThadmBuyModal({ open, onClose }: ThadmBuyModalProps) {
             </button>
             <h3 className="mb-1 text-xl font-bold text-white">Choose your plan</h3>
             <p className="mb-6 text-sm text-gray-400">
-              {platformsMeta.find((p) => p.id === selectedPlatform)?.label} selected. Pick a plan to continue.
+              {platformsMeta.find((p) => p.id === selectedPlatform)?.label} selected. Pick a plan to
+              continue.
             </p>
 
             <div className="space-y-3">
@@ -194,9 +189,7 @@ export function ThadmBuyModal({ open, onClose }: ThadmBuyModalProps) {
                 >
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <span className="block text-sm font-semibold text-white">
-                        {plan.label}
-                      </span>
+                      <span className="block text-sm font-semibold text-white">{plan.label}</span>
                       {plan.badge && (
                         <span className="rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 px-2 py-0.5 text-[10px] font-semibold text-white">
                           {plan.badge}
