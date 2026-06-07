@@ -9,7 +9,7 @@ export const siteConfig: SiteConfig = {
   downloadUrl: 'https://github.com/sbpk516/transcriptai/releases/latest/download/TranscriptAI-0.1.7-arm64.dmg',
   // Windows installer (NSIS). The live URL is resolved dynamically from the latest
   // GitHub release (.exe asset); this is the fallback.
-  windowsUrl: 'https://github.com/sbpk516/transcriptai/releases/download/v0.5.0/TranscriptAI-Setup-0.5.0.exe',
+  windowsUrl: 'https://github.com/sbpk516/transcriptai/releases/download/v0.5.0/TranscriptAI.Setup.0.5.0.exe',
   // TODO: paste the LemonSqueezy/Stripe checkout link for the $18.83 TranscriptAI
   // license. While empty, the page shows the free-trial download as the primary CTA.
   checkoutUrl: '',
