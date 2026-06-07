@@ -2,6 +2,7 @@ import { ArrowUpRight, Cpu, Infinity as InfinityIcon, Shield } from 'lucide-reac
 import { cn } from '@/lib/utils'
 import type { AppRoute } from '@/hooks/useHashRoute'
 import transcriptAICapture from '@/assets/images/Capture_Page.png'
+import voice2textIcon from '@/assets/images/voice2text-icon.png'
 
 interface ProductHubProps {
   navigate: (route: AppRoute) => void
@@ -35,6 +36,18 @@ export function ProductHub({ navigate }: ProductHubProps) {
         onOpen={() => navigate('transcriptai')}
         visual={<TranscriptAIVisual />}
         reverse
+      />
+      <ProductScene
+        index="03"
+        name="Voice2Text"
+        status="New"
+        statusTone="pink"
+        tagline="Record. Transcribe. Stays on your PC."
+        description="A lightweight, fully-offline voice recorder and transcriber for Windows — built for English and Indian languages. Record or import audio and get an editable transcript, with nothing ever leaving your device."
+        platforms={['Windows', '100% Offline', 'English + Indian languages']}
+        pricing="Free 15-day trial · $18.85 one-time"
+        onOpen={() => navigate('voice2text')}
+        visual={<Voice2TextVisual />}
       />
       <Principles />
       <Teaser />
@@ -95,7 +108,7 @@ interface ProductSceneProps {
   index: string
   name: string
   status: string
-  statusTone: 'violet' | 'cyan'
+  statusTone: 'violet' | 'cyan' | 'pink'
   tagline: string
   description: string
   platforms: string[]
@@ -121,7 +134,9 @@ function ProductScene({
   const statusClass =
     statusTone === 'violet'
       ? 'text-indigo-200 border-indigo-400/30 bg-indigo-500/10'
-      : 'text-cyan-200 border-cyan-400/30 bg-cyan-500/10'
+      : statusTone === 'pink'
+        ? 'text-pink-200 border-pink-400/30 bg-pink-500/10'
+        : 'text-cyan-200 border-cyan-400/30 bg-cyan-500/10'
 
   return (
     <section className="relative border-t border-white/[0.06] py-24 lg:py-36">
@@ -248,6 +263,21 @@ function TranscriptAIVisual() {
           className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10"
         />
       </div>
+    </div>
+  )
+}
+
+function Voice2TextVisual() {
+  return (
+    <div className="group relative flex aspect-[3/2] w-full items-center justify-center [animation:float-gentle_8s_ease-in-out_infinite_-2s]">
+      {/* Ambient breathing glow */}
+      <div className="pointer-events-none absolute inset-0 -m-10 bg-[radial-gradient(ellipse_at_center,rgba(224,36,94,0.30)_0%,rgba(255,71,87,0.12)_42%,transparent_70%)] blur-2xl [animation:glow-pulse_6s_ease-in-out_infinite_-2s]" />
+      <img
+        src={voice2textIcon}
+        alt="Voice2Text"
+        className="relative h-44 w-44 rounded-[40px] shadow-[0_40px_100px_-20px_rgba(224,36,94,0.5),0_20px_60px_-20px_rgba(0,0,0,0.8)] transition-all duration-500 ease-out group-hover:-translate-y-1"
+        loading="lazy"
+      />
     </div>
   )
 }

@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback } from 'react'
 
-export type AppRoute = 'products' | 'transcriptai' | 'thadm'
+export type AppRoute = 'products' | 'transcriptai' | 'thadm' | 'voice2text'
 
 const DEFAULT_ROUTE: AppRoute = 'products'
 
 function parseRoute(hash: string): AppRoute {
   const cleaned = hash.replace('#', '').split('?')[0]
-  const validRoutes: AppRoute[] = ['products', 'transcriptai', 'thadm']
+  const validRoutes: AppRoute[] = ['products', 'transcriptai', 'thadm', 'voice2text']
   if (validRoutes.includes(cleaned as AppRoute)) {
     return cleaned as AppRoute
   }

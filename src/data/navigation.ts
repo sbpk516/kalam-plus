@@ -4,7 +4,7 @@ export const navLinks: NavLink[] = [
   { label: 'Products', href: '#products' },
   { label: 'Thadm', href: '#thadm' },
   { label: 'TranscriptAI', href: '#transcriptai' },
-  { label: 'About', href: '#about' },
+  { label: 'Voice2Text', href: '#voice2text' },
 ]
 
 export const footerSections: FooterSection[] = [
@@ -13,6 +13,7 @@ export const footerSections: FooterSection[] = [
     links: [
       { label: 'Thadm', href: '#thadm', badge: 'NEW' },
       { label: 'TranscriptAI', href: '#transcriptai' },
+      { label: 'Voice2Text', href: '#voice2text', badge: 'NEW' },
       { label: 'Neural Notes', href: '#', badge: 'Coming Soon' },
     ],
   },
