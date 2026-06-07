@@ -1,4 +1,4 @@
-import { Apple, Download, Shield, Zap, Cpu } from 'lucide-react'
+import { Apple, Download, Shield, Zap, Cpu, Monitor } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import { siteConfig, ctaText } from '@/data/site'
 import { trackDownload } from '@/lib/analytics'
@@ -7,7 +7,7 @@ import logo from '@/assets/images/logo.jpg'
 import heroScreenshot from '@/assets/images/Capture_Page.png'
 
 export function Hero() {
-  const { version, downloadUrl } = useGithubRelease()
+  const { version, downloadUrl, windowsUrl } = useGithubRelease()
 
   return (
     <section className="relative overflow-hidden pb-24 pt-36 lg:pb-32 lg:pt-48">
@@ -54,15 +54,26 @@ export function Hero() {
 
           {/* Primary CTA */}
           <div className="mt-12 flex flex-col items-center gap-5">
-            <a
-              href={downloadUrl}
-              onClick={() => trackDownload('hero')}
-              className={buttonVariants({ size: 'lg', className: 'group' })}
-            >
-              <Apple className="h-6 w-6" />
-              <span>{ctaText.hero.button}</span>
-              <Download className="h-5 w-5 transition-transform group-hover:translate-y-0.5" />
-            </a>
+            <div className="flex flex-col items-center gap-3 sm:flex-row">
+              <a
+                href={downloadUrl}
+                onClick={() => trackDownload('hero')}
+                className={buttonVariants({ size: 'lg', className: 'group' })}
+              >
+                <Apple className="h-6 w-6" />
+                <span>{ctaText.hero.button}</span>
+                <Download className="h-5 w-5 transition-transform group-hover:translate-y-0.5" />
+              </a>
+              <a
+                href={windowsUrl}
+                onClick={() => trackDownload('hero_windows')}
+                className={buttonVariants({ size: 'lg', className: 'group bg-white/10 hover:bg-white/15' })}
+              >
+                <Monitor className="h-6 w-6" />
+                <span>Download for Windows</span>
+                <Download className="h-5 w-5 transition-transform group-hover:translate-y-0.5" />
+              </a>
+            </div>
 
             <div className="flex items-center gap-4 text-sm text-gray-500">
               <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-mono text-xs tracking-wide">

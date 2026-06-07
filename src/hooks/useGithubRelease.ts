@@ -3,7 +3,8 @@ import { siteConfig } from '@/data/site'
 
 interface ReleaseInfo {
   version: string
-  downloadUrl: string
+  downloadUrl: string // macOS .dmg
+  windowsUrl: string // Windows .exe installer
 }
 
 const REPO = 'sbpk516/transcriptai'
@@ -11,6 +12,7 @@ const REPO = 'sbpk516/transcriptai'
 const fallback: ReleaseInfo = {
   version: siteConfig.version,
   downloadUrl: siteConfig.downloadUrl,
+  windowsUrl: siteConfig.windowsUrl,
 }
 
 // Module-level cache: single promise shared by all hook instances
@@ -24,13 +26,17 @@ function fetchLatestRelease(): Promise<ReleaseInfo> {
         return res.json()
       })
       .then((data) => {
-        const dmgAsset = data.assets?.find(
-          (a: { name: string }) => a.name.endsWith('.dmg')
+        const assets: { name: string; browser_download_url: string }[] = data.assets ?? []
+        const dmg = assets.find((a) => a.name.endsWith('.dmg'))
+        // Windows installer: prefer the NSIS Setup .exe (exclude blockmap/portable).
+        const exe = assets.find(
+          (a) => a.name.toLowerCase().endsWith('.exe') && !a.name.endsWith('.blockmap')
         )
-        if (dmgAsset) {
+        if (dmg || exe) {
           return {
-            version: data.tag_name,
-            downloadUrl: dmgAsset.browser_download_url,
+            version: data.tag_name ?? fallback.version,
+            downloadUrl: dmg?.browser_download_url ?? fallback.downloadUrl,
+            windowsUrl: exe?.browser_download_url ?? fallback.windowsUrl,
           }
         }
         return fallback

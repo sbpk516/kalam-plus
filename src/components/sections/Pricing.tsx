@@ -1,11 +1,11 @@
-import { Check, Apple, Download } from 'lucide-react'
+import { Check, Apple, Download, Monitor } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import { siteConfig } from '@/data/site'
 import { pricingFeatures } from '@/data/pricing'
 import { useGithubRelease } from '@/hooks/useGithubRelease'
 
 export function Pricing() {
-  const { downloadUrl } = useGithubRelease()
+  const { downloadUrl, windowsUrl } = useGithubRelease()
 
   return (
     <section id="pricing" className="relative border-t border-white/[0.06] py-24 lg:py-36">
@@ -35,10 +35,10 @@ export function Pricing() {
             {/* Top accent hairline */}
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
 
-            {/* Beta Badge */}
+            {/* Promo Badge */}
             <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-200">
               <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
-              Free During Beta
+              {siteConfig.price.promoLabel ?? 'Limited-time offer'}
             </div>
 
             {/* Price */}
@@ -69,14 +69,38 @@ export function Pricing() {
             </ul>
 
             {/* CTA */}
-            <a href={downloadUrl} className={buttonVariants({ size: 'lg', className: 'w-full' })}>
-              <Apple className="h-5 w-5" />
-              <span>Download for macOS</span>
-              <Download className="h-5 w-5" />
-            </a>
+            {siteConfig.checkoutUrl ? (
+              <a
+                href={siteConfig.checkoutUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonVariants({ size: 'lg', className: 'w-full' })}
+              >
+                <span>Buy a license — {siteConfig.price.currency}{siteConfig.price.current}</span>
+              </a>
+            ) : (
+              <div className="flex flex-col gap-3">
+                <a href={downloadUrl} className={buttonVariants({ size: 'lg', className: 'w-full' })}>
+                  <Apple className="h-5 w-5" />
+                  <span>Download for macOS</span>
+                  <Download className="h-5 w-5" />
+                </a>
+                <a href={windowsUrl} className={buttonVariants({ size: 'lg', className: 'w-full bg-white/10 hover:bg-white/15' })}>
+                  <Monitor className="h-5 w-5" />
+                  <span>Download for Windows</span>
+                  <Download className="h-5 w-5" />
+                </a>
+              </div>
+            )}
+
+            {siteConfig.checkoutUrl && (
+              <a href={downloadUrl} className="mt-3 block text-center text-sm text-cyan-200/80 hover:text-cyan-100">
+                or download — free 15-day trial
+              </a>
+            )}
 
             <p className="mt-4 text-center text-xs text-gray-500">
-              Get it free during our beta period.
+              Free 15-day trial, then a one-time {siteConfig.price.currency}{siteConfig.price.current}. No subscription, no cloud.
             </p>
           </div>
         </div>

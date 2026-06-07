@@ -67,10 +67,13 @@ export interface SiteConfig {
   version: string
   platform: string
   downloadUrl: string
+  windowsUrl: string
+  checkoutUrl: string
   price: {
     current: number
     original: number
     currency: string
     period: string
+    promoLabel?: string
   }
 }

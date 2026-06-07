@@ -1,11 +1,11 @@
-import { Apple, Download } from 'lucide-react'
+import { Apple, Download, Monitor } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import { ctaText } from '@/data/site'
 import { trackDownload } from '@/lib/analytics'
 import { useGithubRelease } from '@/hooks/useGithubRelease'
 
 export function FinalCTA() {
-  const { downloadUrl } = useGithubRelease()
+  const { downloadUrl, windowsUrl } = useGithubRelease()
   const [lead, rest] = ctaText.final.headline.split('your transcriptions')
 
   return (
@@ -34,15 +34,26 @@ export function FinalCTA() {
           </p>
 
           <div className="mt-12 flex flex-col items-center gap-4">
-            <a
-              href={downloadUrl}
-              onClick={() => trackDownload('final_cta')}
-              className={buttonVariants({ size: 'lg', className: 'group' })}
-            >
-              <Apple className="h-6 w-6" />
-              <span>{ctaText.final.button}</span>
-              <Download className="h-5 w-5 transition-transform group-hover:translate-y-0.5" />
-            </a>
+            <div className="flex flex-col items-center gap-3 sm:flex-row">
+              <a
+                href={downloadUrl}
+                onClick={() => trackDownload('final_cta')}
+                className={buttonVariants({ size: 'lg', className: 'group' })}
+              >
+                <Apple className="h-6 w-6" />
+                <span>{ctaText.final.button}</span>
+                <Download className="h-5 w-5 transition-transform group-hover:translate-y-0.5" />
+              </a>
+              <a
+                href={windowsUrl}
+                onClick={() => trackDownload('final_cta_windows')}
+                className={buttonVariants({ size: 'lg', className: 'group bg-white/10 hover:bg-white/15' })}
+              >
+                <Monitor className="h-6 w-6" />
+                <span>Download for Windows</span>
+                <Download className="h-5 w-5 transition-transform group-hover:translate-y-0.5" />
+              </a>
+            </div>
 
             <p className="text-sm text-gray-500">{ctaText.final.note}</p>
           </div>
