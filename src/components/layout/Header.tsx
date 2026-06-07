@@ -1,4 +1,4 @@
-import { Sparkles } from 'lucide-react'
+import { Sparkles, Download } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { navLinks } from '@/data/navigation'
 import { siteConfig } from '@/data/site'
@@ -13,6 +13,17 @@ interface HeaderProps {
 
 export function Header({ currentRoute, navigate }: HeaderProps) {
   const { open, openModal, closeModal } = useThadmBuyModal()
+
+  const isThadm = currentRoute === 'thadm'
+
+  // For TranscriptAI (and the hub), the CTA goes to the TranscriptAI page and
+  // scrolls to its pricing/download section instead of opening the Thadm modal.
+  const getTranscriptAI = () => {
+    if (currentRoute !== 'transcriptai') navigate('transcriptai')
+    window.setTimeout(() => {
+      document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
+    }, 120)
+  }
 
   return (
     <>
@@ -54,14 +65,24 @@ export function Header({ currentRoute, navigate }: HeaderProps) {
             })}
           </div>
 
-          {/* Buy Thadm CTA */}
-          <button
-            onClick={openModal}
-            className="group inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 px-4 py-1.5 text-[13px] font-medium text-white shadow-[0_8px_24px_-8px_rgba(99,102,241,0.5)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-8px_rgba(99,102,241,0.65)]"
-          >
-            <Sparkles className="h-3.5 w-3.5" strokeWidth={2} />
-            <span className="hidden sm:inline">Buy Thadm</span>
-          </button>
+          {/* Route-aware CTA: Buy Thadm on the Thadm page, else Get TranscriptAI */}
+          {isThadm ? (
+            <button
+              onClick={openModal}
+              className="group inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 px-4 py-1.5 text-[13px] font-medium text-white shadow-[0_8px_24px_-8px_rgba(99,102,241,0.5)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-8px_rgba(99,102,241,0.65)]"
+            >
+              <Sparkles className="h-3.5 w-3.5" strokeWidth={2} />
+              <span className="hidden sm:inline">Buy Thadm</span>
+            </button>
+          ) : (
+            <button
+              onClick={getTranscriptAI}
+              className="group inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-1.5 text-[13px] font-medium text-white shadow-[0_8px_24px_-8px_rgba(34,211,238,0.5)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-8px_rgba(34,211,238,0.65)]"
+            >
+              <Download className="h-3.5 w-3.5" strokeWidth={2} />
+              <span className="hidden sm:inline">Get TranscriptAI</span>
+            </button>
+          )}
         </nav>
       </header>
 
